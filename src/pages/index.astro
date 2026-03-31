@@ -40,7 +40,7 @@ const steps = [
         <h1>منوصلك<br/>للزبون <span class="hero__orange">الصحيح</span></h1>
         <p class="hero__sub">نساعدكم على تنمية أعمالكم من خلال حملات إعلانية ذكية ومحتوى رقمي يستقطب العملاء المناسبين.</p>
         <div class="hero__cta">
-          <a href="/contact" class="btn">ابدأ الآن</a>
+          <a href="/contact" class="btn pulse">ابدأ الآن</a>
           <a href="/services" class="btn btn--outline">خدماتنا</a>
         </div>
       </div>
@@ -228,6 +228,8 @@ const steps = [
     align-items: center;
   }
   .hero__orange { color: var(--orange); }
+  .hero__text { animation: slide-in-right 0.8s ease-out; }
+  .hero__tool { animation: slide-in-left 0.8s ease-out; }
   .hero h1 { font-size: 3.2rem; margin-bottom: 1rem; }
   .hero__sub { font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; }
   .hero__cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
@@ -269,7 +271,8 @@ const steps = [
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
   }
-  .svc-card__icon { font-size: 1.75rem; display: block; margin-bottom: 0.75rem; }
+  .svc-card__icon { font-size: 1.75rem; display: block; margin-bottom: 0.75rem; transition: transform 0.3s; }
+  .svc-card:hover .svc-card__icon { animation: bounce-subtle 0.6s; }
   .svc-card h3 { margin-bottom: 0.35rem; color: #1B2E6E; }
   :global([data-theme="dark"]) .svc-card { background: #0F1D38; border-color: rgba(255,255,255,0.08); }
   :global([data-theme="dark"]) .svc-card h3 { color: #fff; }
@@ -440,6 +443,7 @@ const steps = [
     background: #f4f6fa;
   }
   :global([data-theme="dark"]) .cta-box { background: #0F1D38; border-color: rgba(255,255,255,0.1); }
+  .cta-box { animation: glow-border 4s ease-in-out infinite; }
   .cta-box h2 { margin-bottom: 0.5rem; }
   .cta-box p { max-width: 450px; margin: 0 auto 1.5rem; }
 

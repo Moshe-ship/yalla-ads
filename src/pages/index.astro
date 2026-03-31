@@ -6,30 +6,30 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()).slice(0, 3);
 
 const services = [
-  { icon: '📢', title: 'إعلانات Google', desc: 'حملات مدروسة توصل إعلانك للأشخاص الذين يبحثون فعلاً عن خدماتك.' },
-  { icon: '📱', title: 'إدارة السوشال ميديا', desc: 'محتوى يجذب الانتباه ويجعل جمهورك يتفاعل معك يومياً.' },
-  { icon: '🔍', title: 'تحسين محركات البحث', desc: 'نجعل موقعك يظهر في النتائج الأولى عندما يبحث العميل عنك.' },
-  { icon: '🎨', title: 'صناعة المحتوى', desc: 'تصاميم وفيديوهات تحكي قصة علامتك التجارية باحترافية.' },
-  { icon: '🎯', title: 'جذب العملاء', desc: 'استراتيجيات ذكية تجلب لك عملاء جدد بشكل مستمر.' },
+  { icon: '📢', title: 'إعلانات Google', desc: 'حملات إعلانية مدروسة تصل إلى العملاء المحتملين في اللحظة المناسبة.' },
+  { icon: '📱', title: 'إدارة وسائل التواصل', desc: 'إدارة شاملة لحساباتكم مع محتوى احترافي يعزّز التفاعل والمتابعة.' },
+  { icon: '🔍', title: 'تحسين محركات البحث', desc: 'نضمن ظهور موقعكم في النتائج الأولى عند بحث العملاء عن خدماتكم.' },
+  { icon: '🎨', title: 'صناعة المحتوى', desc: 'تصاميم وفيديوهات احترافية تعكس هوية علامتكم التجارية بتميّز.' },
+  { icon: '🎯', title: 'جذب العملاء', desc: 'أنظمة متكاملة لاستقطاب العملاء المحتملين وتحويلهم إلى عملاء فعليين.' },
 ];
 
 const stats = [
   { number: '+150', label: 'عميل' },
   { number: '+500', label: 'حملة ناجحة' },
-  { number: '3x', label: 'زيادة مبيعات' },
-  { number: '24/7', label: 'دعم' },
+  { number: '3x', label: 'نمو المبيعات' },
+  { number: '24/7', label: 'دعم متواصل' },
 ];
 
 const steps = [
-  { num: '1', title: 'نحلل وضعك', desc: 'نفهم مشروعك وجمهورك ومنافسيك.' },
-  { num: '2', title: 'نبني الخطة', desc: 'نصمم استراتيجية تناسب أهدافك وميزانيتك.' },
-  { num: '3', title: 'ننفذ ونطور', desc: 'نعمل على الحملات ونتابع النتائج باستمرار.' },
+  { num: '1', title: 'التحليل', desc: 'دراسة مشروعكم وجمهوركم المستهدف والمنافسين.' },
+  { num: '2', title: 'التخطيط', desc: 'بناء استراتيجية تسويقية متكاملة تناسب أهدافكم.' },
+  { num: '3', title: 'التنفيذ', desc: 'إطلاق الحملات ومتابعة الأداء والتطوير المستمر.' },
 ];
 ---
 
 <Base
   title="يلا ادز — منوصلك للزبون الصحيح | وكالة تسويق رقمي"
-  description="وكالة تسويق رقمي متخصصة في إعلانات قوقل، إدارة السوشال ميديا، تحسين محركات البحث وصناعة المحتوى. منوصلك للزبون الصحيح."
+  description="وكالة تسويق رقمي متخصصة في إعلانات Google، إدارة وسائل التواصل الاجتماعي، تحسين محركات البحث وصناعة المحتوى الرقمي."
 >
 
   <!-- Hero -->
@@ -38,9 +38,9 @@ const steps = [
       <div class="hero__text">
         <span class="tag">وكالة تسويق رقمي معتمدة</span>
         <h1>منوصلك<br/>للزبون <span class="hero__orange">الصحيح</span></h1>
-        <p class="hero__sub">نساعدك على تنمية مشروعك عبر حملات إعلانية ذكية ومحتوى يجذب عملاء حقيقيين.</p>
+        <p class="hero__sub">نساعدكم على تنمية أعمالكم من خلال حملات إعلانية ذكية ومحتوى رقمي يستقطب العملاء المناسبين.</p>
         <div class="hero__cta">
-          <a href="/contact" class="btn">ابدأ الحين</a>
+          <a href="/contact" class="btn">ابدأ الآن</a>
           <a href="/services" class="btn btn--outline">خدماتنا</a>
         </div>
       </div>
@@ -69,7 +69,7 @@ const steps = [
     <div class="container">
       <div class="sec-header">
         <span class="tag">خدماتنا</span>
-        <h2>كل اللي يحتاجه مشروعك</h2>
+        <h2>كل ما يحتاجه مشروعكم للنجاح الرقمي</h2>
       </div>
       <div class="services-grid">
         {services.map(s => (
@@ -87,8 +87,8 @@ const steps = [
   <section class="section section--light">
     <div class="container">
       <div class="sec-header">
-        <span class="tag">كيف نشتغل؟</span>
-        <h2>ثلاث خطوات وتبدأ تشوف النتائج</h2>
+        <span class="tag">منهجية العمل</span>
+        <h2>ثلاث خطوات نحو نتائج ملموسة</h2>
       </div>
       <div class="steps-grid">
         {steps.map(s => (
@@ -106,8 +106,8 @@ const steps = [
   <section class="section">
     <div class="container">
       <div class="sec-header">
-        <span class="tag">شركاء معتمدين</span>
-        <h2>نشتغل مع أكبر المنصات</h2>
+        <span class="tag">شركاء معتمدون</span>
+        <h2>نعمل مع أكبر المنصات العالمية</h2>
       </div>
       <div class="certs-row">
         <div class="cert" title="Google Partner">
@@ -143,14 +143,14 @@ const steps = [
     <div class="container">
       <div class="spotlight">
         <div class="spotlight__text">
-          <span class="tag">خدمتنا المميزة</span>
-          <h2>إدارة السوشال ميديا</h2>
-          <p>نتولى عنك إدارة السوشال ميديا بالكامل — من التخطيط والتصميم إلى النشر والتفاعل.</p>
+          <span class="tag">الخدمة الأبرز</span>
+          <h2>إدارة وسائل التواصل الاجتماعي</h2>
+          <p>نتولّى إدارة حساباتكم بالكامل — من التخطيط الاستراتيجي والتصميم إلى النشر والتفاعل مع الجمهور.</p>
           <ul class="check-list">
             <li>خطة محتوى شهرية متكاملة</li>
-            <li>تصاميم احترافية لكل منصة</li>
-            <li>إدارة التعليقات والرسائل</li>
-            <li>تقارير أداء شهرية</li>
+            <li>تصاميم احترافية مخصّصة لكل منصة</li>
+            <li>إدارة التعليقات والرسائل الواردة</li>
+            <li>تقارير أداء دورية وتحليلات مفصّلة</li>
           </ul>
           <a href="/contact" class="btn">اطلب هذه الخدمة</a>
         </div>
@@ -203,9 +203,9 @@ const steps = [
   <section class="section cta-final">
     <div class="container">
       <div class="cta-box">
-        <h2>جاهز تكبر مشروعك؟</h2>
-        <p>احصل على استشارة مجانية وخطة تسويق مخصصة. يلا نبدأ!</p>
-        <a href="/contact" class="btn">تواصل معنا الحين</a>
+        <h2>هل أنتم مستعدّون للنمو؟</h2>
+        <p>احصلوا على استشارة مجانية وخطة تسويق مخصّصة لمشروعكم.</p>
+        <a href="/contact" class="btn">تواصلوا معنا الآن</a>
       </div>
     </div>
   </section>

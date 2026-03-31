@@ -125,7 +125,7 @@ tags: ["tag1", "tag2", "tag3"]
 
   // ── Strategy 1: Cerebras (Qwen3 235B — free, best for Arabic) ──
   if (CEREBRAS_KEY && !text) {
-    const cerebrasModels = ['qwen-3-235b', 'qwen-3-32b', 'llama-3.3-70b'];
+    const cerebrasModels = ['qwen-3-235b-a22b-instruct-2507', 'llama3.1-8b'];
     for (const model of cerebrasModels) {
       try {
         console.log(`Trying Cerebras ${model}...`);

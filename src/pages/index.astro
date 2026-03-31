@@ -165,10 +165,7 @@ const steps = [
                 </div>
               </div>
               <div class="spotlight__post-body">
-                <div class="spotlight__post-slide">
-                  <span class="spotlight__post-icon">📢</span>
-                  <span class="spotlight__post-title">صفحتك على Google<br/>لازم تكون حيّة</span>
-                </div>
+                <img src="/ig-post.jpg" alt="Yalla Ads post" class="spotlight__post-img" />
               </div>
               <div class="spotlight__engagement">
                 <span>❤️ 1,247</span>
@@ -382,17 +379,8 @@ const steps = [
   .spotlight__header-info { display: flex; flex-direction: column; }
   .spotlight__username { font-size: 0.72rem; font-weight: 800; color: #111; line-height: 1.2; }
   .spotlight__handle { font-size: 0.6rem; color: #888; }
-  .spotlight__post-body {
-    width: 100%;
-    aspect-ratio: 1;
-    background: linear-gradient(145deg, #1B2E6E 0%, #2A4494 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .spotlight__post-slide { text-align: center; color: #fff; }
-  .spotlight__post-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
-  .spotlight__post-title { font-size: 0.85rem; font-weight: 800; line-height: 1.5; direction: rtl; }
+  .spotlight__post-body { width: 100%; overflow: hidden; }
+  .spotlight__post-img { width: 100%; height: auto; display: block; }
   .spotlight__engagement {
     display: flex;
     gap: 0.75rem;
@@ -426,8 +414,8 @@ const steps = [
   .blog-card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: var(--shadow-md); }
   .blog-card__img { width: 100%; height: 180px; object-fit: cover; }
   .blog-card__body { padding: 1.25rem; }
-  .blog-card time { font-size: 0.85rem; color: var(--blue-light); font-weight: 600; }
-  :global([data-theme="dark"]) .blog-card time { color: var(--orange); }
+  .blog-card time { font-size: 0.85rem; color: #2A4494; font-weight: 600; }
+  :global([data-theme="dark"]) .blog-card time { color: #7ba0ff; }
   .blog-card h3 { font-size: 1rem; margin: 0.4rem 0; line-height: 1.5; }
   .blog-card p {
     font-size: 0.85rem;

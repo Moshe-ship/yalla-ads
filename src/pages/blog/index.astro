@@ -99,11 +99,12 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
   .blog-card__tag {
     font-size: 0.75rem;
     padding: 0.2rem 0.6rem;
-    background: var(--orange-glow);
-    color: var(--orange);
+    background: rgba(27, 46, 110, 0.08);
+    color: #2A4494;
     border-radius: 4px;
     font-weight: 600;
   }
+  :global([data-theme="dark"]) .blog-card__tag { background: rgba(255,255,255,0.08); color: #7ba0ff; }
 
   .blog-card h2 {
     font-size: 1.1rem;

@@ -1,0 +1,92 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  type?: string;
+  image?: string;
+  schema?: string;
+}
+
+const { title, description, type = 'website', image = '/og-image.png', schema } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.site)} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content="ar_SA" />
+  <meta property="og:site_name" content="يلا ادز - Yalla Ads" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(image, Astro.site)} />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "يلا ادز - Yalla Ads",
+    "url": "https://yalla-ads.com",
+    "logo": "https://yalla-ads.com/logo.png",
+    "description": "وكالة تسويق رقمي متخصصة في إعلانات قوقل، إدارة وسائل التواصل الاجتماعي، تحسين محركات البحث وصناعة المحتوى",
+    "sameAs": [
+      "https://instagram.com/yallaadss"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "info@yalla-ads.com",
+      "contactType": "customer service",
+      "availableLanguage": ["Arabic", "English"]
+    }
+  })} />
+  {schema && <script type="application/ld+json" set:html={schema} />}
+
+  <!-- Theme (prevents flash) -->
+  <script is:inline>
+    (function(){
+      var s = localStorage.getItem('theme');
+      var t = s || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <!-- GA (conditional) -->
+  {import.meta.env.PUBLIC_GA_ID && (
+    <script is:inline define:vars={{ gaId: import.meta.env.PUBLIC_GA_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId);
+    </script>
+  )}
+</head>
+<body>
+  <Nav />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

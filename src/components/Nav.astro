@@ -1,0 +1,232 @@
+---
+const links = [
+  { href: '/', label: 'الرئيسية' },
+  { href: '/services', label: 'خدماتنا' },
+  { href: '/about', label: 'من نحن' },
+  { href: '/blog', label: 'المدونة' },
+  { href: '/contact', label: 'تواصل معنا' },
+];
+---
+
+<nav class="nav">
+  <div class="container nav__inner">
+    <a href="/" class="nav__logo">
+      <img src="/logo.png" alt="يلا ادز" class="nav__logo-img" width="120" height="48" />
+    </a>
+
+    <div class="nav__links" id="nav-links">
+      {links.map(link => (
+        <a href={link.href} class="nav__link">{link.label}</a>
+      ))}
+      <a href="/contact" class="btn btn--sm">استشارة مجانية</a>
+    </div>
+
+    <div class="nav__actions">
+      <button class="nav__theme" id="theme-toggle-desktop" aria-label="تبديل الوضع">
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+
+      <button class="nav__hamburger" id="hamburger" aria-label="القائمة">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu__inner">
+    {links.map(link => (
+      <a href={link.href} class="mobile-menu__link">{link.label}</a>
+    ))}
+    <a href="/contact" class="btn" style="width:100%;margin-top:1rem;">استشارة مجانية</a>
+    <button class="nav__theme mobile-menu__theme" id="theme-toggle-mobile" aria-label="تبديل الوضع">
+      <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span>تبديل الوضع</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: 2rem;
+  }
+
+  .nav__logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  :global([data-theme="dark"]) .nav__logo-img {
+    filter: brightness(1.2) saturate(1.3);
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+  }
+
+  .nav__link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.3s;
+    white-space: nowrap;
+  }
+
+  .nav__link:hover { color: var(--orange); }
+
+  .btn--sm {
+    padding: 0.55rem 1.4rem;
+    font-size: 0.85rem;
+  }
+
+  .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nav__theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--glass-bg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .nav__theme:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+
+  .icon-sun { display: none; }
+  .icon-moon { display: block; }
+  :global([data-theme="dark"]) .icon-sun { display: block; }
+  :global([data-theme="dark"]) .icon-moon { display: none; }
+
+  .nav__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav__hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    top: var(--nav-h);
+    z-index: 99;
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 2rem 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .mobile-menu.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .mobile-menu__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mobile-menu__link {
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    transition: color 0.3s;
+  }
+
+  .mobile-menu__link:hover { color: var(--orange); }
+
+  .mobile-menu__theme {
+    width: auto;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .mobile-menu__theme span {
+    font-family: var(--font);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .nav__links { display: none; }
+    .nav__hamburger { display: flex; }
+    #theme-toggle-desktop { display: none; }
+  }
+</style>
+
+<script>
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  }
+
+  document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggleTheme);
+  document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  hamburger?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('active');
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-menu__link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.remove('active');
+    });
+  });
+</script>

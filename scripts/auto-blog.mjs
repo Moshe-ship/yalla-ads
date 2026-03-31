@@ -8,9 +8,10 @@
 import fs from 'fs';
 import path from 'path';
 
+const CEREBRAS_KEY = process.env.CEREBRAS_API_KEY;
 const GEMINI_KEY = process.env.GEMINI_API_KEY;
-if (!GEMINI_KEY) {
-  console.error('GEMINI_API_KEY not set');
+if (!CEREBRAS_KEY && !GEMINI_KEY) {
+  console.error('Neither CEREBRAS_API_KEY nor GEMINI_API_KEY set');
   process.exit(1);
 }
 
@@ -120,53 +121,86 @@ tags: ["tag1", "tag2", "tag3"]
 
 [Full blog post content here in markdown]`;
 
-  const models = ['gemini-2.0-flash-lite', 'gemini-2.0-flash', 'gemini-1.5-flash'];
   let text = null;
 
-  for (const model of models) {
-    for (let attempt = 0; attempt < 3; attempt++) {
+  // ── Strategy 1: Cerebras (Qwen3 235B — free, best for Arabic) ──
+  if (CEREBRAS_KEY && !text) {
+    const cerebrasModels = ['qwen-3-235b', 'qwen-3-32b', 'llama-3.3-70b'];
+    for (const model of cerebrasModels) {
       try {
-        console.log(`Trying ${model} (attempt ${attempt + 1})...`);
-        const res = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              contents: [{ parts: [{ text: prompt }] }],
-              generationConfig: {
-                temperature: 0.8,
-                maxOutputTokens: 8192,
-              },
-            }),
-            signal: AbortSignal.timeout(90000),
-          }
-        );
+        console.log(`Trying Cerebras ${model}...`);
+        const res = await fetch('https://api.cerebras.ai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${CEREBRAS_KEY}`,
+          },
+          body: JSON.stringify({
+            model,
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.8,
+            max_tokens: 8192,
+          }),
+          signal: AbortSignal.timeout(120000),
+        });
 
         if (res.status === 429) {
-          console.warn(`Rate limited on ${model}, waiting 15s...`);
-          await new Promise(r => setTimeout(r, 15000));
+          console.warn(`Cerebras ${model} rate limited, trying next...`);
+          continue;
+        }
+        if (!res.ok) {
+          console.warn(`Cerebras ${model} error ${res.status}`);
           continue;
         }
 
-        if (!res.ok) {
-          const err = await res.text();
-          console.warn(`${model} error ${res.status}: ${err.slice(0, 200)}`);
-          break; // try next model
-        }
-
         const data = await res.json();
-        text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (text) break;
+        text = data.choices?.[0]?.message?.content;
+        if (text) { console.log(`Success with Cerebras ${model}`); break; }
       } catch (e) {
-        console.warn(`${model} attempt ${attempt + 1} failed: ${e.message}`);
-        if (attempt < 2) await new Promise(r => setTimeout(r, 5000));
+        console.warn(`Cerebras ${model} failed: ${e.message}`);
       }
     }
-    if (text) break;
   }
 
-  if (!text) throw new Error('All models failed to generate content');
+  // ── Strategy 2: Gemini fallback ──
+  if (!text && GEMINI_KEY) {
+    const geminiModels = ['gemini-2.0-flash-lite', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+    for (const model of geminiModels) {
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          console.log(`Trying Gemini ${model} (attempt ${attempt + 1})...`);
+          const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: { temperature: 0.8, maxOutputTokens: 8192 },
+              }),
+              signal: AbortSignal.timeout(90000),
+            }
+          );
+
+          if (res.status === 429) {
+            console.warn(`Gemini ${model} rate limited, waiting 15s...`);
+            await new Promise(r => setTimeout(r, 15000));
+            continue;
+          }
+          if (!res.ok) { console.warn(`Gemini ${model} error ${res.status}`); break; }
+
+          const data = await res.json();
+          text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (text) { console.log(`Success with Gemini ${model}`); break; }
+        } catch (e) {
+          console.warn(`Gemini ${model} failed: ${e.message}`);
+        }
+      }
+      if (text) break;
+    }
+  }
+
+  if (!text) throw new Error('All providers failed to generate content');
 
   console.log(`Generated ${text.length} chars`);
   return text.trim();

@@ -20,6 +20,7 @@ jobs:
 
       - name: Generate blog post
         env:
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/auto-blog.mjs
 

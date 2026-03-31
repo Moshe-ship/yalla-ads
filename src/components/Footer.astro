@@ -47,7 +47,8 @@ const company = [
     </div>
 
     <div class="footer__bottom">
-      <p>&copy; {new Date().getFullYear()} يلا ادز — Yalla Ads. جميع الحقوق محفوظة.</p>
+      <p>يلا ادز — Yalla Ads هو مشروع تابع لـ <a href="https://performancemaxagency.com" target="_blank" rel="noopener" class="footer__pmax">Performance MAX Agency</a></p>
+      <p>&copy; {new Date().getFullYear()} Performance MAX Agency. جميع الحقوق محفوظة.</p>
     </div>
   </div>
 </footer>
@@ -119,7 +120,10 @@ const company = [
     margin-top: 1.5rem;
     text-align: center;
   }
-  .footer__bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
+  .footer__bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.25); margin-bottom: 0.25rem; }
+  .footer__bottom p:last-child { margin-bottom: 0; }
+  .footer__pmax { color: var(--orange); transition: opacity 0.25s; }
+  .footer__pmax:hover { opacity: 0.8; }
   @media (max-width: 768px) {
     .footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
     .footer__brand { grid-column: 1 / -1; }

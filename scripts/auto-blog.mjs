@@ -10,8 +10,18 @@ import path from 'path';
 
 const CEREBRAS_KEY = process.env.CEREBRAS_API_KEY;
 const GEMINI_KEY = process.env.GEMINI_API_KEY;
-if (!CEREBRAS_KEY && !GEMINI_KEY) {
-  console.error('Neither CEREBRAS_API_KEY nor GEMINI_API_KEY set');
+
+let puter = null;
+try {
+  const puterModule = await import('@heyputer/puter.js');
+  puter = puterModule.default || puterModule.puter || puterModule;
+  console.log('Puter.js loaded');
+} catch {
+  console.log('Puter.js not available, using API providers');
+}
+
+if (!puter && !CEREBRAS_KEY && !GEMINI_KEY) {
+  console.error('No AI provider available (Puter.js, Cerebras, or Gemini)');
   process.exit(1);
 }
 
@@ -135,6 +145,21 @@ IMPORTANT for the image field: Pick a real Unsplash photo URL that matches the t
 - Data/Charts: photo-1551288049-bebda4e38f71`;
 
   let text = null;
+
+  // ── Strategy 0: Puter.js (free, no API key, all models) ──
+  if (puter && !text) {
+    const puterModels = ['claude-sonnet-4', 'gpt-4o', 'gemini-2.0-flash'];
+    for (const model of puterModels) {
+      try {
+        console.log(`Trying Puter.js ${model}...`);
+        const response = await puter.ai.chat(prompt, { model, stream: false });
+        text = typeof response === 'string' ? response : response?.message?.content || response?.toString();
+        if (text) { console.log(`Success with Puter.js ${model}`); break; }
+      } catch (e) {
+        console.warn(`Puter.js ${model} failed: ${e.message}`);
+      }
+    }
+  }
 
   // ── Strategy 1: Cerebras (Qwen3 235B — free, best for Arabic) ──
   if (CEREBRAS_KEY && !text) {

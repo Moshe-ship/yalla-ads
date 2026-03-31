@@ -120,31 +120,53 @@ tags: ["tag1", "tag2", "tag3"]
 
 [Full blog post content here in markdown]`;
 
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.8,
-          maxOutputTokens: 8192,
-        },
-      }),
-      signal: AbortSignal.timeout(60000),
-    }
-  );
+  const models = ['gemini-2.0-flash-lite', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+  let text = null;
 
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Gemini API error ${res.status}: ${err}`);
+  for (const model of models) {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        console.log(`Trying ${model} (attempt ${attempt + 1})...`);
+        const res = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }],
+              generationConfig: {
+                temperature: 0.8,
+                maxOutputTokens: 8192,
+              },
+            }),
+            signal: AbortSignal.timeout(90000),
+          }
+        );
+
+        if (res.status === 429) {
+          console.warn(`Rate limited on ${model}, waiting 15s...`);
+          await new Promise(r => setTimeout(r, 15000));
+          continue;
+        }
+
+        if (!res.ok) {
+          const err = await res.text();
+          console.warn(`${model} error ${res.status}: ${err.slice(0, 200)}`);
+          break; // try next model
+        }
+
+        const data = await res.json();
+        text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (text) break;
+      } catch (e) {
+        console.warn(`${model} attempt ${attempt + 1} failed: ${e.message}`);
+        if (attempt < 2) await new Promise(r => setTimeout(r, 5000));
+      }
+    }
+    if (text) break;
   }
 
-  const data = await res.json();
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-  if (!text) throw new Error('Empty response from Gemini');
+  if (!text) throw new Error('All models failed to generate content');
 
   console.log(`Generated ${text.length} chars`);
   return text.trim();

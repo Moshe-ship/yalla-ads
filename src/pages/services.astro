@@ -127,12 +127,15 @@ const services = [
   }
 
   .service-row--reverse {
-    direction: ltr;
+    grid-template-columns: 0.8fr 1.2fr;
   }
 
   .service-row--reverse .service-row__text {
-    direction: rtl;
-    text-align: right;
+    order: 2;
+  }
+
+  .service-row--reverse .service-row__visual {
+    order: 1;
   }
 
   .service-row__icon {
@@ -208,9 +211,19 @@ const services = [
       grid-template-columns: 1fr;
       gap: 2rem;
     }
-    .service-row--reverse { direction: rtl; }
+    .service-row--reverse { grid-template-columns: 1fr; }
+    .service-row--reverse .service-row__text { order: 1; }
+    .service-row--reverse .service-row__visual { order: 2; }
     .service-row__features { grid-template-columns: 1fr; }
-    .service-row__visual { min-height: 200px; }
+    .service-row__visual { min-height: 160px; padding: 2rem; }
+    .service-row__big-icon { font-size: 4rem; }
+  }
+
+  @media (max-width: 480px) {
+    .page-header { padding: 5rem 0 2rem; }
+    .page-header h1 { font-size: 1.6rem; }
+    .service-row__desc { font-size: 0.95rem; }
+    .cta-box { padding: 2rem 1.5rem; }
   }
 
   @media (max-width: 480px) {

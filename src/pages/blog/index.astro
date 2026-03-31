@@ -34,7 +34,7 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
                 </div>
                 <h2>{post.data.title}</h2>
                 <p>{post.data.description}</p>
-                <span class="blog-card__read">اقرأ المقال ←</span>
+                <span class="blog-card__read">اقرأ المقال →</span>
               </div>
             </a>
           ))}
@@ -68,7 +68,7 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
 
   .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     gap: 1.5rem;
   }
 
@@ -144,5 +144,12 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
 
   @media (max-width: 768px) {
     .blog-grid { grid-template-columns: 1fr; }
+    .page-header { padding: 5rem 0 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .page-header { padding: 4rem 0 1.5rem; }
+    .page-header h1 { font-size: 1.5rem; }
+    .blog-card__body { padding: 1rem; }
   }
 </style>

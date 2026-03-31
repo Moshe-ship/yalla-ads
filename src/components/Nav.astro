@@ -151,22 +151,27 @@ const links = [
 
   /* Mobile menu overlay */
   .mobile-menu {
-    display: none;
     position: fixed;
     inset: 0;
     top: var(--nav-h);
     z-index: 99;
-    background: var(--glass-bg-strong);
+    background: rgba(246, 248, 251, 0.97);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     padding: 2rem 1.5rem;
     opacity: 0;
-    transition: opacity 0.3s;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    overflow-y: auto;
+  }
+
+  :global([data-theme="dark"]) .mobile-menu {
+    background: rgba(12, 18, 32, 0.97);
   }
 
   .mobile-menu.active {
-    display: block;
     opacity: 1;
+    visibility: visible;
   }
 
   .mobile-menu__inner {

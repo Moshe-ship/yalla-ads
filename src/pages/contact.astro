@@ -190,8 +190,16 @@ const nextSteps = [
   }
 
   @media (max-width: 768px) {
+    .page-header { padding: 5rem 0 2rem; }
     .contact-grid { grid-template-columns: 1fr; }
     .contact-form { padding: 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .page-header { padding: 4rem 0 1.5rem; }
+    .page-header h1 { font-size: 1.5rem; }
+    .contact-form { padding: 1.25rem; }
+    .contact-card, .next-steps { padding: 1.25rem; }
   }
 </style>
 

@@ -1,0 +1,74 @@
+name: Auto Blog Generator
+
+on:
+  schedule:
+    # 3x/week: Sunday, Tuesday, Thursday at 8 AM UTC (11 AM Arabia)
+    - cron: '0 8 * * 0,2,4'
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate blog post
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/auto-blog.mjs
+
+      - name: Check for new content
+        id: check
+        run: |
+          if [ -n "$(git status --porcelain src/content/blog/)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          git config user.name "Yalla Ads Bot"
+          git config user.email "bot@yalla-ads.com"
+          git add src/content/blog/
+          git commit -m "Auto blog: new post $(date +%Y-%m-%d)"
+          git push
+
+  deploy:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Pull latest (includes new blog post)
+        run: git pull origin main
+
+      - name: Install & Build
+        env:
+          PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ./dist/
+          server-dir: /public_html/
+          dangerous-clean-slate: true

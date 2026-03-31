@@ -113,13 +113,26 @@ REQUIREMENTS:
 OUTPUT FORMAT — return ONLY this, no extra text:
 ---
 title: "العنوان هنا"
-description: "وصف قصير ١-٢ جملة"
+description: "وصف قصير ١-٢ جملة بين 120-160 حرف"
 date: "${today}"
 author: "فريق يلا ادز"
-tags: ["tag1", "tag2", "tag3"]
+tags: ["تسويق رقمي", "tag2", "tag3"]
+image: "https://images.unsplash.com/photo-RELEVANT_PHOTO_ID?w=800&q=80"
 ---
 
-[Full blog post content here in markdown]`;
+[Full blog post content here in markdown]
+
+IMPORTANT for the image field: Pick a real Unsplash photo URL that matches the topic. Use one of these based on the subject:
+- Digital marketing: photo-1460925895917-afdab827c52f
+- Social media: photo-1611162617474-5b21e879e113
+- SEO/Analytics: photo-1562577309-4932fdd64cd1
+- Content creation: photo-1542744094-3a31f272c490
+- Business growth: photo-1432888622747-4eb9a8efeb07
+- Technology: photo-1518770660439-4636190af475
+- Strategy/Planning: photo-1454165804606-c3d57bc86b40
+- Advertising: photo-1563986768609-322da13575f2
+- E-commerce: photo-1556742049-0cfed4f6a45d
+- Data/Charts: photo-1551288049-bebda4e38f71`;
 
   let text = null;
 

@@ -4,6 +4,7 @@ description: "تعرف على أساسيات SEO وكيف تجعل موقعك ي
 date: "2026-03-15"
 author: "فريق يلا ادز"
 tags: ["SEO", "تحسين محركات البحث", "تسويق رقمي"]
+image: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=800&q=80"
 ---
 
 ## ما هو الـ SEO؟

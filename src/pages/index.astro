@@ -155,18 +155,27 @@ const steps = [
           <a href="/contact" class="btn">اطلب هذه الخدمة</a>
         </div>
         <div class="spotlight__visual">
-          <div class="spotlight__phone">
+          <div class="spotlight__phone float">
             <div class="spotlight__screen">
               <div class="spotlight__post-header">
-                <div class="spotlight__avatar"></div>
-                <span>@yallaadss</span>
+                <img src="/logo.png" alt="yallaadss" class="spotlight__avatar-img" />
+                <div class="spotlight__header-info">
+                  <span class="spotlight__username">yallaadss</span>
+                  <span class="spotlight__handle">Marketing Agency</span>
+                </div>
               </div>
-              <div class="spotlight__post-body"></div>
+              <div class="spotlight__post-body">
+                <div class="spotlight__post-slide">
+                  <span class="spotlight__post-icon">📢</span>
+                  <span class="spotlight__post-title">صفحتك على Google<br/>لازم تكون حيّة</span>
+                </div>
+              </div>
               <div class="spotlight__engagement">
                 <span>❤️ 1,247</span>
                 <span>💬 89</span>
                 <span>📤 156</span>
               </div>
+              <p class="spotlight__caption"><strong>yallaadss</strong> بوستات استراتيجية، مفيدة، ومخطّطة...</p>
             </div>
           </div>
         </div>
@@ -233,7 +242,8 @@ const steps = [
     grid-template-columns: repeat(4, 1fr);
   }
   .stat { text-align: center; padding: 1rem 0.5rem; }
-  .stat__num { display: block; font-size: 2rem; font-weight: 900; color: var(--orange); font-feature-settings: 'tnum'; }
+  .stat__num { display: block; font-size: 2rem; font-weight: 900; color: var(--blue); font-feature-settings: 'tnum'; }
+  :global([data-theme="dark"]) .stat__num { color: #fff; }
   .stat__label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.03em; }
 
   /* Section header */
@@ -257,8 +267,8 @@ const steps = [
     background: var(--bg);
   }
   .svc-card:hover {
-    border-color: var(--orange);
-    transform: translateY(-2px);
+    border-color: var(--blue);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
   }
   .svc-card__icon { font-size: 1.75rem; display: block; margin-bottom: 0.75rem; }
@@ -276,7 +286,7 @@ const steps = [
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: var(--orange);
+    background: var(--blue);
     color: #fff;
     font-size: 1.25rem;
     font-weight: 900;
@@ -340,44 +350,64 @@ const steps = [
     content: '✓';
     position: absolute;
     right: 0;
-    color: var(--orange);
+    color: var(--blue);
     font-weight: 700;
   }
+  :global([data-theme="dark"]) .check-list li::before { color: var(--orange); }
   .spotlight__phone {
-    width: 220px;
+    width: 240px;
     margin: 0 auto;
-    background: var(--blue-deep);
-    border-radius: 28px;
-    padding: 12px;
-    box-shadow: var(--shadow-lg);
+    background: #111;
+    border-radius: 32px;
+    padding: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
   }
   .spotlight__screen {
     background: #fff;
-    border-radius: 20px;
-    padding: 1rem;
+    border-radius: 24px;
     overflow: hidden;
   }
   .spotlight__post-header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 0.75rem;
+    padding: 0.6rem 0.75rem;
   }
-  .spotlight__avatar {
+  .spotlight__avatar-img {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    object-fit: cover;
   }
-  .spotlight__post-header span { font-size: 0.75rem; font-weight: 700; color: var(--blue-deep); }
+  .spotlight__header-info { display: flex; flex-direction: column; }
+  .spotlight__username { font-size: 0.72rem; font-weight: 800; color: #111; line-height: 1.2; }
+  .spotlight__handle { font-size: 0.6rem; color: #888; }
   .spotlight__post-body {
     width: 100%;
-    height: 160px;
-    background: linear-gradient(135deg, #1B2E6E, #2A4494);
-    border-radius: 8px;
-    margin-bottom: 0.75rem;
+    aspect-ratio: 1;
+    background: linear-gradient(145deg, #1B2E6E 0%, #2A4494 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .spotlight__engagement { display: flex; gap: 0.75rem; font-size: 0.7rem; color: var(--text-muted); }
+  .spotlight__post-slide { text-align: center; color: #fff; }
+  .spotlight__post-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+  .spotlight__post-title { font-size: 0.85rem; font-weight: 800; line-height: 1.5; direction: rtl; }
+  .spotlight__engagement {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.65rem;
+    color: #555;
+    padding: 0.5rem 0.75rem 0.25rem;
+  }
+  .spotlight__caption {
+    font-size: 0.6rem;
+    color: #555;
+    padding: 0 0.75rem 0.6rem;
+    line-height: 1.4;
+    direction: rtl;
+  }
+  .spotlight__caption strong { color: #111; }
 
   /* Blog */
   .blog-grid {
@@ -393,10 +423,11 @@ const steps = [
     transition: all 0.25s;
     background: var(--bg);
   }
-  .blog-card:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .blog-card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: var(--shadow-md); }
   .blog-card__img { width: 100%; height: 180px; object-fit: cover; }
   .blog-card__body { padding: 1.25rem; }
-  .blog-card time { font-size: 0.85rem; color: var(--orange); font-weight: 600; }
+  .blog-card time { font-size: 0.85rem; color: var(--blue-light); font-weight: 600; }
+  :global([data-theme="dark"]) .blog-card time { color: var(--orange); }
   .blog-card h3 { font-size: 1rem; margin: 0.4rem 0; line-height: 1.5; }
   .blog-card p {
     font-size: 0.85rem;

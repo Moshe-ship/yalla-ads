@@ -11,8 +11,28 @@ interface Props {
   schema?: string;
 }
 
-const { title, description, type = 'website', image = '/og-image.png', schema } = Astro.props;
+const { title, description, type = 'website', image = '/logo.png', schema } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const breadcrumbs = [];
+const pathParts = Astro.url.pathname.split('/').filter(Boolean);
+if (pathParts.length > 0) {
+  breadcrumbs.push({ name: 'الرئيسية', url: 'https://yalla-ads.com/' });
+  let currentPath = '';
+  const labels: Record<string, string> = {
+    services: 'خدماتنا',
+    about: 'من نحن',
+    blog: 'المدونة',
+    contact: 'تواصل معنا',
+  };
+  for (const part of pathParts) {
+    currentPath += `/${part}`;
+    breadcrumbs.push({
+      name: labels[part] || part,
+      url: `https://yalla-ads.com${currentPath}/`,
+    });
+  }
+}
 ---
 
 <!DOCTYPE html>
@@ -24,9 +44,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
 
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#E67E22" />
 
   <!-- Open Graph -->
   <meta property="og:type" content={type} />
@@ -43,7 +71,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={new URL(image, Astro.site)} />
 
-  <!-- Schema.org -->
+  <!-- Schema.org: Organization -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -59,8 +87,40 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       "email": "info@yalla-ads.com",
       "contactType": "customer service",
       "availableLanguage": ["Arabic", "English"]
-    }
+    },
+    "areaServed": [
+      { "@type": "Country", "name": "Saudi Arabia" },
+      { "@type": "Country", "name": "United Arab Emirates" },
+      { "@type": "Country", "name": "Kuwait" },
+      { "@type": "Country", "name": "Jordan" }
+    ]
   })} />
+
+  <!-- Schema.org: WebSite -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "يلا ادز",
+    "alternateName": "Yalla Ads",
+    "url": "https://yalla-ads.com",
+    "inLanguage": "ar"
+  })} />
+
+  <!-- Schema.org: BreadcrumbList -->
+  {breadcrumbs.length > 1 && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbs.map((b, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": b.name,
+        "item": b.url,
+      }))
+    })} />
+  )}
+
+  <!-- Page-specific schema -->
   {schema && <script type="application/ld+json" set:html={schema} />}
 
   <!-- Theme (prevents flash) -->

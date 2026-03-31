@@ -1,0 +1,33 @@
+# Yalla Ads — يلا ادز
+> Arabic-first digital marketing agency
+
+## About
+Yalla Ads (يلا ادز) is a digital marketing agency specializing in serving Arabic-speaking businesses across the Middle East. We help businesses reach the right customers through smart advertising, social media management, SEO, content creation, and lead generation.
+
+- Website: https://yalla-ads.com
+- Instagram: https://instagram.com/yallaadss
+- Email: info@yalla-ads.com
+- Languages: Arabic (primary), English
+
+## Services
+- Google Ads (إعلانات قوقل) — Search, Display, YouTube, Shopping campaigns
+- Social Media Management (إدارة السوشال ميديا) — Instagram, TikTok, Snapchat
+- SEO (تحسين محركات البحث) — Technical SEO, content optimization, link building
+- Content Creation (صناعة المحتوى) — Graphic design, video production, copywriting
+- Lead Generation (جذب العملاء) — Landing pages, marketing automation, CRM integration
+
+## Pages
+- Home: https://yalla-ads.com/
+- Services: https://yalla-ads.com/services/
+- About: https://yalla-ads.com/about/
+- Blog: https://yalla-ads.com/blog/
+- Contact: https://yalla-ads.com/contact/
+
+## Blog
+- https://yalla-ads.com/blog/why-social-media-matters/
+- https://yalla-ads.com/blog/google-ads-guide-arabic/
+- https://yalla-ads.com/blog/content-creation-tips/
+- https://yalla-ads.com/blog/seo-basics-arabic/
+
+## Regions Served
+Saudi Arabia, UAE, Kuwait, Jordan, and broader Middle East

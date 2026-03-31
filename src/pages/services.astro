@@ -43,11 +43,35 @@ const services = [
     features: ['صفحات هبوط احترافية', 'حملات جذب العملاء', 'أتمتة التسويق', 'تتبع العملاء المحتملين', 'تحسين معدل التحويل', 'تكامل مع CRM'],
   },
 ];
+
+const serviceSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": services.map((s, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "item": {
+      "@type": "Service",
+      "name": s.title,
+      "alternateName": s.subtitle,
+      "description": s.desc,
+      "serviceType": "Digital Marketing",
+      "provider": {
+        "@type": "Organization",
+        "name": "يلا ادز - Yalla Ads",
+        "url": "https://yalla-ads.com"
+      },
+      "areaServed": ["SA", "AE", "KW", "JO"],
+      "url": `https://yalla-ads.com/services/#${s.id}`
+    }
+  }))
+});
 ---
 
 <Base
   title="خدماتنا — يلا ادز | حلول تسويق رقمي متكاملة"
   description="حلول تسويق رقمي شاملة: إعلانات قوقل، إدارة السوشال ميديا، SEO، صناعة المحتوى، وجذب العملاء."
+  schema={serviceSchema}
 >
 
   <section class="page-header">

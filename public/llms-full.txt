@@ -1,0 +1,82 @@
+# Yalla Ads — يلا ادز
+> وكالة تسويق رقمي عربية — Arabic-first digital marketing agency
+
+## Overview
+Yalla Ads (يلا ادز) is a digital marketing agency that specializes in helping Arabic-speaking businesses grow their online presence and reach the right customers. Our slogan is "منوصلك للزبون الصحيح" (We connect you to the right customer).
+
+We offer comprehensive digital marketing solutions including Google Ads management, social media management, search engine optimization, content creation, and lead generation services.
+
+## Contact Information
+- Website: https://yalla-ads.com
+- Email: info@yalla-ads.com
+- Instagram: @yallaadss (https://instagram.com/yallaadss)
+- Languages: Arabic (Shami and Khaleeji dialects), English
+
+## Services
+
+### 1. Google Ads (إعلانات قوقل)
+Full-service Google Ads management including:
+- Search Ads — appear at the top of Google search results
+- Display Ads — visual banners across partner websites
+- YouTube Ads — video advertising on YouTube
+- Shopping Ads — product listings with images and prices
+- Continuous campaign optimization
+- Weekly performance reports
+
+### 2. Social Media Management (إدارة السوشال ميديا)
+Our flagship service. Complete social media management:
+- Monthly content planning and strategy
+- Professional post design for each platform
+- Management of Instagram, TikTok, and Snapchat accounts
+- Content scheduling and publishing
+- Comment and message management
+- Monthly performance reports
+
+### 3. SEO (تحسين محركات البحث)
+Search engine optimization services:
+- Keyword research and analysis
+- Content optimization for Arabic search
+- Technical SEO improvements
+- Backlink building
+- Site speed and performance optimization
+- Monthly ranking reports
+
+### 4. Content Creation (صناعة المحتوى)
+Professional content production:
+- Graphic design
+- Short-form video production (Reels, TikTok)
+- Marketing copywriting in Arabic
+- Product photography
+- Visual brand identity design
+- Blog articles and long-form content
+
+### 5. Lead Generation (جذب العملاء)
+Complete lead generation systems:
+- Professional landing page design
+- Lead generation campaigns
+- Marketing automation setup
+- Lead tracking and CRM integration
+- Conversion rate optimization
+
+## Regions Served
+Saudi Arabia (KSA), United Arab Emirates (UAE), Kuwait, Jordan, and the broader Middle East region.
+
+## Site Structure
+- Home: https://yalla-ads.com/ — Overview, services, how we work, blog preview
+- Services: https://yalla-ads.com/services/ — Detailed service descriptions
+- About: https://yalla-ads.com/about/ — Company story, values, team stats
+- Blog: https://yalla-ads.com/blog/ — Marketing tips and strategies in Arabic
+- Contact: https://yalla-ads.com/contact/ — Contact form and information
+
+## Blog Articles
+- "ليش السوشال ميديا ضرورية لمشروعك في ٢٠٢٦" — Why social media is essential for your business
+- "دليلك الشامل لإعلانات قوقل للمبتدئين" — Complete Google Ads guide for beginners
+- "٧ أسرار لصناعة محتوى يجذب العملاء" — 7 secrets to creating content that attracts customers
+- "أساسيات تحسين محركات البحث (SEO) لمشروعك" — SEO basics for your business
+
+## Brand
+- Colors: Orange (#E67E22) and Navy Blue (#1B2E6E)
+- Logo: Play button triangle shape with "Yalla ADS" text
+- Font: Tajawal (Arabic)
+- Design: Glassmorphism, modern, responsive, RTL
+- Tagline: منوصلك للزبون الصحيح (We connect you to the right customer)

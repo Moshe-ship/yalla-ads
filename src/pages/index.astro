@@ -281,7 +281,7 @@ const steps = [
     font-size: 1.25rem;
     font-weight: 900;
     margin-bottom: 1rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
   }
   .step h3 { margin-bottom: 0.5rem; }
   .step p { font-size: 0.9rem; }
@@ -359,7 +359,7 @@ const steps = [
     border-radius: 50%;
     background: linear-gradient(135deg, var(--orange), var(--orange-dark));
   }
-  .spotlight__post-header span { font-size: 0.75rem; font-weight: 700; color: #111; }
+  .spotlight__post-header span { font-size: 0.75rem; font-weight: 700; color: var(--blue-deep); }
   .spotlight__post-body {
     width: 100%;
     height: 160px;
@@ -367,7 +367,7 @@ const steps = [
     border-radius: 8px;
     margin-bottom: 0.75rem;
   }
-  .spotlight__engagement { display: flex; gap: 0.75rem; font-size: 0.7rem; color: #666; }
+  .spotlight__engagement { display: flex; gap: 0.75rem; font-size: 0.7rem; color: var(--text-muted); }
 
   /* Blog */
   .blog-grid {
@@ -386,7 +386,7 @@ const steps = [
   .blog-card:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: var(--shadow-md); }
   .blog-card__img { width: 100%; height: 180px; object-fit: cover; }
   .blog-card__body { padding: 1.25rem; }
-  .blog-card time { font-size: 0.8rem; color: var(--orange); font-weight: 600; }
+  .blog-card time { font-size: 0.85rem; color: var(--orange); font-weight: 600; }
   .blog-card h3 { font-size: 1rem; margin: 0.4rem 0; line-height: 1.5; }
   .blog-card p {
     font-size: 0.85rem;

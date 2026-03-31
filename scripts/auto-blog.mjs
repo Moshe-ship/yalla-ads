@@ -99,7 +99,7 @@ Reddit Marketing Discussions:
 ${redditTrends.map(t => `- ${t}`).join('\n')}
 
 REQUIREMENTS:
-1. Write ENTIRELY in Arabic — use a mix of Modern Standard Arabic with Shami/Khaleeji dialect touches (like the word يلا, شو, ليش, عشان)
+1. Write ENTIRELY in Arabic — use clear, neutral Modern Standard Arabic that all Arabic speakers can understand. Keep it professional but approachable. Avoid heavy dialect (no Khaleeji or Shami slang). Use dollars ($) for any pricing, not riyals or dirhams.
 2. Title must be catchy and SEO-friendly (include a number or question)
 3. Must be 1800+ words — this is CRITICAL. Count your words.
 4. Use ## for h2 headings, ### for h3, **bold** for emphasis

@@ -76,7 +76,7 @@ const serviceSchema = JSON.stringify({
 
   <section class="page-header">
     <div class="container">
-      <p class="page-header__tag glow-text">خدماتنا</p>
+      <p class="tag">خدماتنا</p>
       <h1>حلول تسويق رقمي متكاملة</h1>
       <p class="page-header__sub">كل اللي يحتاجه مشروعك عشان يوصل للجمهور الصحيح ويكبر</p>
     </div>
@@ -96,7 +96,7 @@ const serviceSchema = JSON.stringify({
             </ul>
             <a href="/contact" class="btn">اطلب هالخدمة</a>
           </div>
-          <div class="service-row__visual glass">
+          <div class="service-row__visual">
             <span class="service-row__big-icon">{s.icon}</span>
           </div>
         </div>
@@ -119,16 +119,8 @@ const serviceSchema = JSON.stringify({
 
 <style>
   .page-header {
-    padding: 6rem 0 3rem;
+    padding: 5rem 0 2rem;
     text-align: center;
-  }
-
-  .page-header__tag {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
   }
 
   .page-header h1 { margin-bottom: 1rem; }
@@ -214,11 +206,12 @@ const serviceSchema = JSON.stringify({
     padding: 3rem;
     border-radius: var(--radius-lg);
     min-height: 280px;
+    background: var(--blue);
   }
 
   .service-row__big-icon {
     font-size: 6rem;
-    opacity: 0.8;
+    filter: grayscale(1) brightness(10);
   }
 
   .cta-box {
@@ -244,13 +237,9 @@ const serviceSchema = JSON.stringify({
   }
 
   @media (max-width: 480px) {
-    .page-header { padding: 5rem 0 2rem; }
+    .page-header { padding: 3.5rem 0 1.5rem; }
     .page-header h1 { font-size: 1.6rem; }
     .service-row__desc { font-size: 0.95rem; }
-    .cta-box { padding: 2rem 1.5rem; }
-  }
-
-  @media (max-width: 480px) {
     .cta-box { padding: 2.5rem 1.5rem; }
   }
 </style>

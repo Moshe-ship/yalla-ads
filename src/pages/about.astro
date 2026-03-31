@@ -25,7 +25,7 @@ const stats = [
 
   <section class="page-header">
     <div class="container">
-      <p class="page-header__tag glow-text">من نحن</p>
+      <p class="tag">من نحن</p>
       <h1>فريق يحب التسويق ويفهم السوق العربي</h1>
       <p class="page-header__sub">نحن فريق من خبراء التسويق الرقمي شغوفين بمساعدة المشاريع العربية تنمو وتنجح في العالم الرقمي.</p>
     </div>
@@ -54,8 +54,8 @@ const stats = [
 
   <section class="section section--dark">
     <div class="container">
-      <div class="section-header section-header--light">
-        <p class="section-header__tag glow-text">قيمنا</p>
+      <div class="sec-header sec-header--light">
+        <p class="tag">قيمنا</p>
         <h2>ليش تختارنا؟</h2>
       </div>
       <div class="values-grid">
@@ -84,16 +84,8 @@ const stats = [
 
 <style>
   .page-header {
-    padding: 6rem 0 3rem;
+    padding: 5rem 0 2rem;
     text-align: center;
-  }
-
-  .page-header__tag {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
   }
 
   .page-header h1 { margin-bottom: 1rem; }
@@ -142,20 +134,12 @@ const stats = [
     font-weight: 500;
   }
 
-  .section-header {
+  .sec-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
-  .section-header__tag {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-header--light h2 { color: #fff; }
+  .sec-header--light h2 { color: #fff; }
 
   .values-grid {
     display: grid;
@@ -194,14 +178,13 @@ const stats = [
   .cta-box > p { max-width: 500px; margin: 0 auto 2rem; }
 
   @media (max-width: 768px) {
-    .page-header { padding: 5rem 0 2rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .about-stats { padding: 2rem; }
     .values-grid { grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
   }
 
   @media (max-width: 480px) {
-    .page-header { padding: 4rem 0 1.5rem; }
+    .page-header { padding: 3.5rem 0 1.5rem; }
     .page-header h1 { font-size: 1.5rem; }
     .about-text p { font-size: 0.95rem; }
     .about-stat__number { font-size: 1.8rem; }

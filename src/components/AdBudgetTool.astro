@@ -1,0 +1,220 @@
+---
+---
+<div class="tool" id="budget-tool">
+  <div class="tool__step" id="tool-form">
+    <h3>احسب ميزانية إعلاناتك المقترحة</h3>
+    <p>أداة مجانية تساعدك تعرف كم تحتاج تصرف على الإعلانات</p>
+
+    <div class="tool__field">
+      <label>مجال عملك</label>
+      <select id="tool-industry" class="input">
+        <option value="">اختر المجال</option>
+        <option value="restaurant">مطاعم وكافيهات</option>
+        <option value="ecommerce">متجر إلكتروني</option>
+        <option value="realestate">عقارات</option>
+        <option value="medical">عيادات وصحة</option>
+        <option value="education">تعليم وتدريب</option>
+        <option value="beauty">تجميل وعناية</option>
+        <option value="services">خدمات عامة</option>
+        <option value="tech">تقنية وبرمجيات</option>
+      </select>
+    </div>
+
+    <div class="tool__field">
+      <label>هدفك الرئيسي</label>
+      <select id="tool-goal" class="input">
+        <option value="">اختر الهدف</option>
+        <option value="leads">جذب عملاء محتملين</option>
+        <option value="sales">زيادة المبيعات</option>
+        <option value="brand">بناء الوعي بالعلامة</option>
+        <option value="traffic">زيادة زيارات الموقع</option>
+      </select>
+    </div>
+
+    <div class="tool__field">
+      <label>ميزانيتك الشهرية الحالية (ريال)</label>
+      <select id="tool-budget" class="input">
+        <option value="">اختر النطاق</option>
+        <option value="0">ما أصرف شي حالياً</option>
+        <option value="1000">أقل من 1,000</option>
+        <option value="3000">1,000 - 5,000</option>
+        <option value="7500">5,000 - 10,000</option>
+        <option value="15000">أكثر من 10,000</option>
+      </select>
+    </div>
+
+    <button class="btn" id="tool-calculate" style="width:100%">احسب ميزانيتي</button>
+  </div>
+
+  <div class="tool__step tool__results" id="tool-results" style="display:none">
+    <div class="tool__score-row">
+      <div class="tool__score-circle">
+        <svg viewBox="0 0 120 120" class="tool__ring">
+          <circle cx="60" cy="60" r="54" stroke="rgba(0,0,0,0.08)" stroke-width="8" fill="none"/>
+          <circle cx="60" cy="60" r="54" stroke="#E67E22" stroke-width="8" fill="none"
+            stroke-dasharray="339.3" stroke-dashoffset="339.3" stroke-linecap="round"
+            id="tool-ring" transform="rotate(-90 60 60)"/>
+        </svg>
+        <span class="tool__score-num" id="tool-score-num">0</span>
+      </div>
+      <div class="tool__score-info">
+        <span class="tool__score-label" id="tool-score-label">—</span>
+        <span class="tool__score-verdict" id="tool-verdict">—</span>
+      </div>
+    </div>
+
+    <div class="tool__breakdown" id="tool-breakdown"></div>
+
+    <div class="tool__cta">
+      <p>تبي خطة تسويق مفصلة مجاناً؟</p>
+      <a href="/contact" class="btn" style="width:100%">احصل على خطتك المجانية</a>
+      <button class="tool__reset" id="tool-reset">أعد الحساب</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .tool {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+  }
+  .tool h3 { font-size: 1.15rem; margin-bottom: 0.25rem; }
+  .tool > .tool__step > p { font-size: 0.85rem; margin-bottom: 1.25rem; }
+  .tool__field { margin-bottom: 1rem; }
+  .tool__field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+  }
+  .tool__results { text-align: center; }
+  .tool__score-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: right;
+  }
+  .tool__score-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+  }
+  .tool__ring { width: 100%; height: 100%; }
+  .tool__score-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--orange);
+  }
+  .tool__score-info { display: flex; flex-direction: column; gap: 0.25rem; }
+  .tool__score-label { font-size: 0.85rem; color: var(--text-muted); }
+  .tool__score-verdict { font-size: 1.1rem; font-weight: 800; color: var(--text); }
+  .tool__breakdown { margin-bottom: 1.5rem; text-align: right; }
+  .tool__breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  .tool__breakdown-item span:first-child { color: var(--text-secondary); }
+  .tool__breakdown-item span:last-child { font-weight: 700; color: var(--text); }
+  .tool__cta p { font-size: 0.85rem; margin-bottom: 0.75rem; color: var(--text-secondary); }
+  .tool__reset {
+    margin-top: 0.75rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font);
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  :global([data-theme="dark"]) .tool__ring circle:first-child { stroke: rgba(255,255,255,0.08); }
+</style>
+
+<script>
+  const data: Record<string, { cpl: number; name: string }> = {
+    restaurant: { cpl: 15, name: 'مطاعم' },
+    ecommerce: { cpl: 25, name: 'متاجر' },
+    realestate: { cpl: 50, name: 'عقارات' },
+    medical: { cpl: 40, name: 'صحة' },
+    education: { cpl: 20, name: 'تعليم' },
+    beauty: { cpl: 18, name: 'تجميل' },
+    services: { cpl: 22, name: 'خدمات' },
+    tech: { cpl: 35, name: 'تقنية' },
+  };
+
+  const goalMul: Record<string, number> = { leads: 1, sales: 1.3, brand: 0.7, traffic: 0.6 };
+  const goalNames: Record<string, string> = { leads: 'جذب عملاء', sales: 'مبيعات', brand: 'وعي', traffic: 'زيارات' };
+
+  document.getElementById('tool-calculate')?.addEventListener('click', () => {
+    const ind = (document.getElementById('tool-industry') as HTMLSelectElement).value;
+    const goal = (document.getElementById('tool-goal') as HTMLSelectElement).value;
+    const budgetStr = (document.getElementById('tool-budget') as HTMLSelectElement).value;
+    if (!ind || !goal || budgetStr === '') return;
+
+    const info = data[ind];
+    const mul = goalMul[goal];
+    const currentBudget = parseInt(budgetStr);
+
+    const recMonthly = Math.round(info.cpl * 30 * mul);
+    const expectedLeads = Math.round(recMonthly / info.cpl);
+    const roi = Math.round((expectedLeads * info.cpl * 4) / recMonthly * 100);
+
+    let score = 0;
+    if (currentBudget === 0) score = 25;
+    else if (currentBudget < recMonthly * 0.5) score = 45;
+    else if (currentBudget < recMonthly) score = 65;
+    else score = 85;
+
+    const ring = document.getElementById('tool-ring') as SVGCircleElement;
+    const pct = score / 100;
+    ring.style.strokeDashoffset = String(339.3 * (1 - pct));
+
+    const numEl = document.getElementById('tool-score-num')!;
+    let c = 0;
+    const interval = setInterval(() => {
+      c += 2;
+      if (c >= score) { c = score; clearInterval(interval); }
+      numEl.textContent = String(c);
+    }, 20);
+
+    document.getElementById('tool-score-label')!.textContent = 'نتيجة جاهزيتك الإعلانية';
+    const verdicts: Record<string, string> = {
+      '25': 'تحتاج تبدأ الحين!',
+      '45': 'عندك فرصة كبيرة للنمو',
+      '65': 'أنت بالطريق الصحيح',
+      '85': 'ممتاز! حان وقت التوسع',
+    };
+    document.getElementById('tool-verdict')!.textContent = verdicts[String(score)] || 'أنت بالطريق الصحيح';
+
+    const bd = document.getElementById('tool-breakdown')!;
+    bd.innerHTML = `
+      <div class="tool__breakdown-item"><span>الميزانية المقترحة شهرياً</span><span>${recMonthly.toLocaleString()} ريال</span></div>
+      <div class="tool__breakdown-item"><span>عملاء محتملين متوقعين</span><span>~${expectedLeads} عميل/شهر</span></div>
+      <div class="tool__breakdown-item"><span>تكلفة العميل المحتمل</span><span>~${info.cpl} ريال</span></div>
+      <div class="tool__breakdown-item"><span>العائد المتوقع (ROI)</span><span>${roi}%</span></div>
+    `;
+
+    document.getElementById('tool-form')!.style.display = 'none';
+    document.getElementById('tool-results')!.style.display = 'block';
+  });
+
+  document.getElementById('tool-reset')?.addEventListener('click', () => {
+    document.getElementById('tool-form')!.style.display = 'block';
+    document.getElementById('tool-results')!.style.display = 'none';
+  });
+</script>

@@ -12,7 +12,7 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
 
   <section class="page-header">
     <div class="container">
-      <p class="page-header__tag glow-text">المدونة</p>
+      <p class="tag">المدونة</p>
       <h1>نصائح واستراتيجيات تسويقية</h1>
       <p class="page-header__sub">محتوى تعليمي يساعدك تفهم التسويق الرقمي وتطبقه على مشروعك</p>
     </div>
@@ -51,16 +51,8 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
 
 <style>
   .page-header {
-    padding: 6rem 0 3rem;
+    padding: 5rem 0 2rem;
     text-align: center;
-  }
-
-  .page-header__tag {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
   }
 
   .page-header h1 { margin-bottom: 1rem; }
@@ -144,11 +136,10 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
 
   @media (max-width: 768px) {
     .blog-grid { grid-template-columns: 1fr; }
-    .page-header { padding: 5rem 0 2rem; }
   }
 
   @media (max-width: 480px) {
-    .page-header { padding: 4rem 0 1.5rem; }
+    .page-header { padding: 3.5rem 0 1.5rem; }
     .page-header h1 { font-size: 1.5rem; }
     .blog-card__body { padding: 1rem; }
   }

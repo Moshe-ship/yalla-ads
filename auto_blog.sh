@@ -99,7 +99,7 @@ print(json.dumps({
 " "$body_file" "$slug" "$word_count" "$source_name")
 
   rid="${source_name}-selfscore-$(date +%Y%m%d-%H%M%S)"
-  response=$(curl -sf -X POST "http://192.168.40.3:7438/review" \
+  response=$(curl -sf -X POST "http://100.118.222.70:7438/review" \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $token" \
     -H "X-Request-ID: $rid" \

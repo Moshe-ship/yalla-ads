@@ -60,7 +60,53 @@ if [ "$DRY_RUN" = "--dry-run" ]; then
 fi
 
 echo "$RESULT" > "$BLOG_DIR/$SLUG.md"
+# --- Frontmatter validation guard (hardening after blog-2026-04-12 incident) ---
+bash ~/Projects/shared/validate_blog_frontmatter.sh $BLOG_DIR/$SLUG.md || {
+    echo "  FAIL: frontmatter validation rejected the generated post, not committing"
+    exit 9
+}
+
 git add "$BLOG_DIR/$SLUG.md" public/blog-images/ 2>/dev/null || true
 git commit -m "blog: $SLUG"
 git push origin main
 echo "PUBLISHED: $SLUG"
+
+# ── Self-scoring (appended by session 2026-04-13) ─────────────────────────────
+# After successful publish, submit the blog body to the content review webhook.
+selfscore_blog() {
+  local source_name="$1"
+  local slug="$2"
+  local body_file="$3"
+  local word_count="$4"
+
+  [ -f "$body_file" ] || return 0
+  [ -f "$HOME/.webhook_token" ] || return 0
+
+  local token payload rid response status
+  token=$(cat "$HOME/.webhook_token")
+  payload=$(python3 -c "
+import json, sys
+body = open(sys.argv[1]).read()
+print(json.dumps({
+    'keyword': sys.argv[2],
+    'article': body,
+    'word_count': int(sys.argv[3]),
+    'seo_score': 0,
+    'title_tag': '',
+    'meta_description': '',
+    'source': sys.argv[4] + '-selfscore',
+}))
+" "$body_file" "$slug" "$word_count" "$source_name")
+
+  rid="${source_name}-selfscore-$(date +%Y%m%d-%H%M%S)"
+  response=$(curl -sf -X POST "http://192.168.40.3:7438/review" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $token" \
+    -H "X-Request-ID: $rid" \
+    -d "$payload" 2>/dev/null || echo "{}")
+  status=$(echo "$response" | python3 -c "import sys,json;print(json.load(sys.stdin).get(\"status\",\"unknown\"))" 2>/dev/null || echo "error")
+  echo "  selfscore: status=$status request_id=$rid"
+}
+
+# Run self-score on the published blog (non-fatal on error)
+selfscore_blog "yalla" "$SLUG" "$BLOG_DIR/$SLUG.md" "$(wc -w < "$BLOG_DIR/$SLUG.md" | tr -d ' ')" || true

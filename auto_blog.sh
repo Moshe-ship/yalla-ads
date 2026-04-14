@@ -61,7 +61,7 @@ fi
 
 echo "$RESULT" > "$BLOG_DIR/$SLUG.md"
 # --- Frontmatter validation guard (hardening after blog-2026-04-12 incident) ---
-bash ~/Projects/shared/validate_blog_frontmatter.sh $BLOG_DIR/$SLUG.md || {
+MIN_BLOG_WORDS=150 bash ~/Projects/shared/validate_blog_frontmatter.sh $BLOG_DIR/$SLUG.md || {
     echo "  FAIL: frontmatter validation rejected the generated post, not committing"
     exit 9
 }

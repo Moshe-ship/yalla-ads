@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
+# ERR-TRAP-v1
+trap 'ec=$?; echo "[ERR] exit=$ec line=$LINENO cmd=${BASH_COMMAND}" >&2; exit $ec' ERR
 cd "$(dirname "$0")"
 BLOG_DIR="src/content/blog"
 DATE=$(date +%Y-%m-%d)

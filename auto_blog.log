@@ -11,3 +11,4 @@ Image: /tmp/yalla_blog_2026-05-01.jpg
 [main 3ce0038] blog: blog-2026-05-01
  2 files changed, 135 insertions(+)
  create mode 100644 src/content/blog/blog-2026-05-01.md
+[2026-05-13] Generating Yalla Ads Arabic blog via local LLM...

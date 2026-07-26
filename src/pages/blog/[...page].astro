@@ -2,7 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+export async function getStaticPaths({ paginate }) {
+  const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+  return paginate(posts, { pageSize: 12 });
+}
+const { page } = Astro.props;
 ---
 
 <Base
@@ -20,9 +24,9 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
 
   <section class="section">
     <div class="container">
-      {posts.length > 0 ? (
+      {page.data.length > 0 ? (
         <div class="blog-grid">
-          {posts.map(post => (
+          {page.data.map(post => (
             <a href={`/blog/${post.id}`} class="blog-card glass">
               {post.data.image && <img src={post.data.image} alt={post.data.title} class="blog-card__img" loading="lazy" />}
               <div class="blog-card__body">
@@ -44,6 +48,14 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
           <p>المقالات قادمة قريباً! تابعنا على <a href="https://instagram.com/yallaadss" target="_blank" rel="noopener">انستقرام</a> للمزيد.</p>
         </div>
       )}
+
+      {(page.url.prev || page.url.next) && (
+        <nav class="pagination">
+          {page.url.prev && <a href={page.url.prev} class="pagination__link">الصفحة السابقة →</a>}
+          <span class="pagination__info">صفحة {page.currentPage} من {page.lastPage}</span>
+          {page.url.next && <a href={page.url.next} class="pagination__link">← الصفحة التالية</a>}
+        </nav>
+      )}
     </div>
   </section>
 
@@ -57,6 +69,23 @@ const posts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date)
 
   .page-header h1 { margin-bottom: 1rem; }
   .page-header__sub { font-size: 1.1rem; max-width: 550px; margin: 0 auto; }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+  .pagination__link {
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  .pagination__link:hover { opacity: 0.75; }
+  .pagination__info { font-size: 0.95rem; opacity: 0.7; }
 
   .blog-grid {
     display: grid;

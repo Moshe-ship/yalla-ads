@@ -3,8 +3,8 @@ title: "أساسيات تحسين محركات البحث SEO لمشروعك"
 description: "تعرف على أساسيات SEO وكيف تجعل موقعك يظهر في النتائج الأولى على Google بدون إعلانات مدفوعة."
 date: "2026-03-15"
 author: "فريق يلا ادز"
-tags: ["SEO", "تحسين محركات البحث", "تسويق رقمي"]
-image: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=800&q=80"
+tags: ["تسويق رقمي"]
+image: "/blog-images/yalla-e513ed18fdd3.jpg"
 ---
 
 ## ما هو الـ SEO؟

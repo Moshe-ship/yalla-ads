@@ -21,7 +21,9 @@ Rules:
 - 1800+ words
 - Include h2/h3 Arabic headers
 - Real statistics and actionable Arabic advice
+- Add 2-3 relevant internal links inside the body using markdown to other يلا ادز topics where natural, e.g. [نص عربي](/blog/other-topic-slug) — link on descriptive Arabic anchor text, never 'اضغط هنا'.
 - End with CTA for يلا ادز
+- TAGS: pick EXACTLY 2-3 tags, using the EXACT Arabic words from THIS fixed list ONLY (so posts interlink by topic): تسويق رقمي | سيو | إعلانات جوجل | سوشيال ميديا | تسويق بالمحتوى | تجارة إلكترونية | تسويق بالبريد الإلكتروني | إعلانات ممولة | تحليلات | العلامة التجارية
 - Start with frontmatter:
 ---
 title: \"عنوان عربي\"
@@ -32,6 +34,7 @@ image: \"/blog-images/$DATE.jpg\"
 tags: [\"تسويق رقمي\", \"سيو\"]
 ---
 
+SECOND-TO-LAST LINE: SLUG: a short English URL slug for this post (lowercase, hyphens only, 3-6 keywords describing the topic in English, e.g. google-ads-for-restaurants)
 LAST LINE: IMAGE_QUERY: english search terms for stock photo
 
 Write the complete Arabic post now."
@@ -43,14 +46,20 @@ IMAGE_QUERY=$(echo "$RESULT" | grep "^IMAGE_QUERY:" | sed 's/IMAGE_QUERY: *//')
 [ -z "$IMAGE_QUERY" ] && IMAGE_QUERY="arabic digital marketing social media"
 RESULT=$(echo "$RESULT" | grep -v "^IMAGE_QUERY:")
 
-IMAGE_PATH="/tmp/yalla_blog_$DATE.jpg"
+# Title-based English slug from the LLM (Arabic titles don't make clean URLs).
+SLUG=$(echo "$RESULT" | grep -m1 "^SLUG:" | sed 's/SLUG: *//' | tr '[:upper:]' '[:lower:]' | tr -cd 'a-z0-9- ' | tr ' ' '-' | sed 's/--*/-/g;s/^-//;s/-$//' | cut -c1-60)
+RESULT=$(echo "$RESULT" | grep -v "^SLUG:")
+[ -z "$SLUG" ] && SLUG="yalla-$DATE"
+
+# Per-slug image path (kills the date-keyed duplicate-image bug — every post its own picture).
+IMAGE_PATH="/tmp/yalla_blog_$SLUG.jpg"
 python3 "$SHARED/fetch_image.py" "$IMAGE_QUERY" "$IMAGE_PATH" yallaads 2>/dev/null
 if [ -f "$IMAGE_PATH" ] && [ -s "$IMAGE_PATH" ]; then
   mkdir -p public/blog-images
-  cp "$IMAGE_PATH" "public/blog-images/$DATE.jpg"
+  cp "$IMAGE_PATH" "public/blog-images/$SLUG.jpg"
 fi
-
-SLUG="blog-$DATE"
+# Rewrite the frontmatter image path from the date-keyed default to the per-slug file.
+RESULT=$(printf '%s' "$RESULT" | sed "s|/blog-images/${DATE}\.jpg|/blog-images/${SLUG}.jpg|g")
 
 if [ "$DRY_RUN" = "--dry-run" ]; then
   WORDS=$(echo "$RESULT" | wc -w | tr -d ' ')

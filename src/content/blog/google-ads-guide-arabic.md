@@ -3,8 +3,8 @@ title: "دليلك الشامل لإعلانات Google للمبتدئين"
 description: "تعلم أساسيات إعلانات Google وكيف تبدأ أول حملة إعلانية ناجحة لمشروعك خطوة بخطوة مع نصائح عملية."
 date: "2026-03-25"
 author: "فريق يلا ادز"
-tags: ["إعلانات Google", "دليل", "تسويق رقمي"]
-image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+tags: ["تسويق رقمي"]
+image: "/blog-images/yalla-6aa386dad6d7.jpg"
 ---
 
 ## ما هي إعلانات Google؟

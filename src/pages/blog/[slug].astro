@@ -14,7 +14,15 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const allPosts = (await getCollection('blog')).sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-const related = allPosts.filter(p => p.id !== post.id).slice(0, 3);
+// Topic-aware internal linking: rank other posts by shared tags (real relevance),
+// falling back to recency for ties / no overlap. Replaces the naive "latest 3".
+const _thisTags = new Set(post.data.tags || []);
+const related = allPosts
+  .filter(p => p.id !== post.id)
+  .map(p => ({ p, score: (p.data.tags || []).filter(t => _thisTags.has(t)).length }))
+  .sort((a, b) => b.score - a.score || new Date(b.p.data.date).getTime() - new Date(a.p.data.date).getTime())
+  .slice(0, 3)
+  .map(x => x.p);
 
 const schema = JSON.stringify({
   "@context": "https://schema.org",

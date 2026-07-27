@@ -4,7 +4,7 @@ description: "تعرف لماذا إدارة السوشال ميديا أصبح�
 date: "2026-03-28"
 author: "فريق يلا ادز"
 tags: ["تسويق رقمي"]
-image: "/blog-images/yalla-15fe3a656d35.jpg"
+image: "/blog-images/yalla-15fe3a656d35.jpg?v=2"
 ---
 
 ## السوشال ميديا أكثر من مجرد بوستات

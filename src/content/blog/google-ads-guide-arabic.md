@@ -4,7 +4,7 @@ description: "تعلم أساسيات إعلانات Google وكيف تبدأ أ
 date: "2026-03-25"
 author: "فريق يلا ادز"
 tags: ["تسويق رقمي"]
-image: "/blog-images/yalla-6aa386dad6d7.jpg"
+image: "/blog-images/yalla-6aa386dad6d7.jpg?v=2"
 ---
 
 ## ما هي إعلانات Google؟

@@ -3,7 +3,7 @@ title: "إعلانات Google المتقدمة: كيف تضيّع أموال ا�
 description: "اكتشف أسرار حملات Google Ads المتقدمة للمعلنين العرب. استراتيجيات ذكية لخفض تكلفة النقرة، مضاعفة المبيعات، وهيمنة نتائج البحث قبل منافسيك."
 date: "2026-04-22"
 author: "يلا ادز"
-image: "/blog-images/yalla-dc9884ae1ded.jpg"
+image: "/blog-images/yalla-dc9884ae1ded.jpg?v=2"
 tags: ["تسويق رقمي"]
 ---
 

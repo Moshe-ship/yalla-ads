@@ -4,7 +4,7 @@ description: "اكتشف أسرار صناعة المحتوى التسويقي �
 date: "2026-03-20"
 author: "فريق يلا ادز"
 tags: ["تسويق رقمي"]
-image: "/blog-images/yalla-5b08b9a4bc3a.jpg"
+image: "/blog-images/yalla-5b08b9a4bc3a.jpg?v=2"
 ---
 
 ## المحتوى الجيد هو الملك

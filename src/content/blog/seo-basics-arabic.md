@@ -4,7 +4,7 @@ description: "تعرف على أساسيات SEO وكيف تجعل موقعك ي
 date: "2026-03-15"
 author: "فريق يلا ادز"
 tags: ["تسويق رقمي"]
-image: "/blog-images/yalla-e513ed18fdd3.jpg"
+image: "/blog-images/yalla-e513ed18fdd3.jpg?v=2"
 ---
 
 ## ما هو الـ SEO؟

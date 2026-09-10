@@ -244,11 +244,13 @@ const nextSteps = [
         form.reset();
         setStatus('تم استلام رسالتك ✓ راح نتواصل معك قريباً.', true);
       } else {
-        // Never report success for a message that did not send.
-        throw new Error(data.error || 'ما قدرنا نرسل رسالتك.');
+        // Never report success for a message that did not send. The server
+        // already names the fallback address, so don't append it again.
+        setStatus(data.error || 'ما قدرنا نرسل رسالتك. راسلنا على info@yalla-ads.com', false);
       }
-    } catch (err) {
-      setStatus((err as Error).message + ' تقدر تراسلنا على info@yalla-ads.com', false);
+    } catch {
+      // Network or non-JSON response: the server said nothing, so we do.
+      setStatus('فيه مشكلة بالاتصال. تأكد من الإنترنت أو راسلنا على info@yalla-ads.com', false);
     } finally {
       btn.disabled = false;
       btn.textContent = original;

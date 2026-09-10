@@ -24,7 +24,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
 }
 
 // Honeypot: bots fill hidden fields, humans don't. Feign success so the bot moves on.
-if (!empty($_POST['company_website'] ?? '')) {
+if (!empty($_POST['hp_field'] ?? '')) {
     echo json_encode(['success' => true]);
     exit;
 }

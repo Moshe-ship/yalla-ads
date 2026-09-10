@@ -53,8 +53,11 @@ const nextSteps = [
             <label for="message">رسالتك</label>
             <textarea id="message" name="message" class="input" placeholder="احكيلنا عن مشروعك وكيف نقدر نساعدك..." rows="5" required></textarea>
           </div>
-          <input type="text" name="company_website" tabindex="-1" autocomplete="off"
-                 aria-hidden="true" class="hp" />
+          <!-- Bot trap. Named neutrally and marked readonly so no browser or
+               password manager ever autofills it; a real person cannot type
+               in it either. Only a script filling every input trips it. -->
+          <input type="text" name="hp_field" tabindex="-1" autocomplete="off"
+                 readonly aria-hidden="true" class="hp" />
           <button type="submit" class="btn btn--full">أرسل الرسالة</button>
           <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
         </form>

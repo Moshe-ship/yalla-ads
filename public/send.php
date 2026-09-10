@@ -110,8 +110,11 @@ try {
     $mail->CharSet    = 'UTF-8';
     $mail->Timeout    = 15;
 
-    // Authenticated account is the sender; replies go straight to the lead.
-    $mail->setFrom($cfg['user'], 'Yalla Ads Website');
+    // Authenticate as the real Workspace user, but send AS the Yalla Ads
+    // address so nothing in the inbox reads "Performance MAX". Google accepts
+    // this because yalla-ads.com is a user alias domain of the same account.
+    // Replies go straight to the lead.
+    $mail->setFrom($cfg['from'] ?? 'info@yalla-ads.com', 'Yalla Ads');
     $mail->addAddress($cfg['to'] ?? $cfg['user']);
     $mail->addReplyTo($email, $name);
 
